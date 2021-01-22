@@ -18,10 +18,10 @@ export default function Route({
           render={props => {
             if (!user.token) {
               if (privated) {
-                return <Redirect to="/login" />;
+                return <Redirect to="/" />;
               }
             } else if (guest) {
-              return <Redirect to="/developers" />;
+              return <Redirect to="/dashboard" />;
             }
 
             return <Component {...props} />;
