@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback, useContext } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
+import { useParams } from 'react-router-dom';
 
 import Camera from '~/assets/camera.svg';
 import { UserContext } from '~/contexts/User';
@@ -18,12 +19,11 @@ const schema = Yup.object().shape({
   price: Yup.string(),
 });
 
-export default function Spot({ match }) {
+export default () => {
   const [spot, setSpot] = useState({});
   const [thumbnail, setThumbnail] = useState(null);
   const [preview, setPreview] = useState('');
-  const { token } = useContext(UserContext);
-  const { id: spot_id } = match.params;
+  const { id: spotId } = useParams();
 
   const showPreview = useCallback(event => {
     const file = event.target.files[0];

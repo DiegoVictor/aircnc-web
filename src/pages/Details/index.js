@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { parseISO, format } from 'date-fns';
-import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
 
 import { UserContext } from '~/contexts/User';
 import api from '~/services/api';
@@ -10,10 +10,9 @@ import Box from '~/components/Box';
 import { Spot, Banner, Techs, Bookings, LinkButton } from './styles';
 import Layout from '~/components/Layout';
 
-export default function Details({ match }) {
+export default () => {
   const [spot, setSpot] = useState(null);
-  const { token } = useContext(UserContext);
-  const { id: spot_id } = match.params;
+  const { id: spotId } = useParams();
 
   const reject = useCallback(
     booking_id => {
