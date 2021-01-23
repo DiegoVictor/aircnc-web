@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState, useContext } from 'react';
 import { parseISO, format } from 'date-fns';
 import { useParams } from 'react-router-dom';
 
-import { UserContext } from '~/contexts/User';
 import api from '~/services/api';
 import history from '~/services/history';
 import Back from '~/components/Back';

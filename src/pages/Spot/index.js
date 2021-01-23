@@ -5,7 +5,6 @@ import * as Yup from 'yup';
 import { useParams } from 'react-router-dom';
 
 import Camera from '~/assets/camera.svg';
-import { UserContext } from '~/contexts/User';
 import api from '~/services/api';
 import Back from '~/components/Back';
 import Box from '~/components/Box';
