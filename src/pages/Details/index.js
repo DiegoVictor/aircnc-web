@@ -132,12 +132,4 @@ export default () => {
       )}
     </>
   );
-}
-
-Details.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    }).isRequired,
-  }).isRequired,
 };

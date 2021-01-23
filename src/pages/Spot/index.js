@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback, useContext } from 'react';
 import { Form, Input } from '@rocketseat/unform';
-import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { useParams } from 'react-router-dom';
 
@@ -113,12 +112,4 @@ export default () => {
       </Box>
     </>
   );
-}
-
-Spot.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    }).isRequired,
-  }).isRequired,
 };
