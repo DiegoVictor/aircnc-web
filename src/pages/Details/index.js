@@ -8,7 +8,6 @@ import history from '~/services/history';
 import Back from '~/components/Back';
 import Box from '~/components/Box';
 import { Spot, Banner, Techs, Bookings, LinkButton } from './styles';
-import Layout from '~/components/Layout';
 
 export default () => {
   const [spot, setSpot] = useState(null);
@@ -64,7 +63,7 @@ export default () => {
   }, [spot_id, token]);
 
   return (
-    <Layout>
+    <>
       <Back />
       {spot && (
         <Box>
@@ -132,7 +131,7 @@ export default () => {
           )}
         </Box>
       )}
-    </Layout>
+    </>
   );
 }
 

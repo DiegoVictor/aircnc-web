@@ -5,7 +5,6 @@ import { UserContext } from '~/contexts/User';
 import api from '~/services/api';
 import history from '~/services/history';
 import Box from '~/components/Box';
-import Layout from '~/components/Layout';
 
 export default () => {
   const user = useContext(UserContext);
@@ -28,7 +27,6 @@ export default () => {
   );
 
   return (
-    <Layout>
       <Box>
         <p>
           Ofereça <strong>spots</strong> para programadores e encontre{' '}
@@ -48,6 +46,6 @@ export default () => {
           <button type="submit">Enviar</button>
         </Form>
       </Box>
-    </Layout>
+    
   );
 };

@@ -9,9 +9,8 @@ import { UserContext } from '~/contexts/User';
 import api from '~/services/api';
 import Back from '~/components/Back';
 import Box from '~/components/Box';
-import { Thumbnail } from './styles';
 import history from '~/services/history';
-import Layout from '~/components/Layout';
+import { Thumbnail } from './styles';
 
 const schema = Yup.object().shape({
   company: Yup.string().required('Informe o nome da sua empresa'),
@@ -80,7 +79,7 @@ export default () => {
   }, [spot_id, token]);
 
   return (
-    <Layout>
+    <>
       <Back />
       <Box>
         <Form schema={schema} onSubmit={handleSubmit} initialData={spot}>
@@ -113,7 +112,7 @@ export default () => {
           <button type="submit">Enviar</button>
         </Form>
       </Box>
-    </Layout>
+    </>
   );
 }
 

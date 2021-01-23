@@ -15,7 +15,6 @@ import {
   Accept,
   Cancel,
 } from './styles';
-import Layout from '~/components/Layout';
 
 export default () => {
   const [spots, setSpots] = useState([]);
@@ -104,7 +103,6 @@ export default () => {
   }, [requests, user_id]);
 
   return (
-    <Layout>
       <Box>
         {requests.length > 0 && (
           <Notifications>
@@ -156,6 +154,5 @@ export default () => {
           <button type="button">Novo spot</button>
         </Link>
       </Box>
-    </Layout>
   );
 };
