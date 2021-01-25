@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useCallback, useContext } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import Camera from '~/assets/camera.svg';
 import api from '~/services/api';
@@ -30,51 +31,51 @@ export default () => {
 
   const handleSubmit = useCallback(
     async ({ company, techs, price }) => {
-      const data = new FormData();
+      try {
+        const data = new FormData();
 
-      if (thumbnail) {
-        data.append('thumbnail', thumbnail);
-      }
+        if (thumbnail) {
+          data.append('thumbnail', thumbnail);
+        }
 
-      data.append('company', company);
-      data.append('techs', techs);
+        data.append('company', company);
+        data.append('techs', techs);
 
-      if (price) {
-        data.append('price', price);
-      }
+        if (price) {
+          data.append('price', price);
+        }
 
-      if (spot_id) {
-        await api.put(`spots/${spot_id}`, data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        history.push(`/spots/${spot_id}`);
-      } else {
-        await api.post('spots', data, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        history.push('/dashboard');
+        if (spotId) {
+          await api.put(`spots/${spotId}`, data);
+          history.push(`/spots/${spotId}`);
+        } else {
+          await api.post('spots', data);
+          history.push('/dashboard');
+        }
+      } catch (err) {
+        toast.error(
+          'Opa! Alguma coisa deu errado ao tentar criar/atualizar o spot, tente novamente!'
+        );
       }
     },
-    [spot_id, thumbnail, token]
+    [spotId, thumbnail]
   );
 
   useEffect(() => {
     (async () => {
-      if (spot_id) {
-        const { data } = await api.get(`spots/${spot_id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setSpot(data);
-        setPreview(data.thumbnail_url);
+      try {
+        if (spotId) {
+          const { data } = await api.get(`spots/${spotId}`);
+          setSpot(data);
+          setPreview(data.thumbnail_url);
+        }
+      } catch (err) {
+        toast.error(
+          'Opa! Alguma coisa deu errado ao tentar carregar os dados do spot, tente recarregar a pagina!'
+        );
       }
     })();
-  }, [spot_id, token]);
+  }, [spotId]);
 
   return (
     <>
