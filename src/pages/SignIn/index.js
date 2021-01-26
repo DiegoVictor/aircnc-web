@@ -34,21 +34,23 @@ export default () => {
   );
 
   return (
-      <Box>
-        <p>
-          Ofereça <strong>spots</strong> para programadores e encontre{' '}
-          <strong>talentos</strong> para sua empresa
-        </p>
+    <Box>
+      <p>
+        Ofereça <strong>spots</strong> para programadores e encontre{' '}
+        <strong>talentos</strong> para sua empresa
+      </p>
 
       <Form schema={schema} onSubmit={handleSubmit}>
-            type="email"
-            placeholder="Seu melhor email"
-            required
-          />
+        <label htmlFor="email">Email *</label>
+        <Input
+          id="email"
+          name="email"
+          type="text"
+          placeholder="Seu melhor email"
+        />
 
-          <button type="submit">Enviar</button>
-        </Form>
-      </Box>
-    
+        <button type="submit">Enviar</button>
+      </Form>
+    </Box>
   );
 };
