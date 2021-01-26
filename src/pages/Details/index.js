@@ -13,20 +13,17 @@ export default () => {
   const { id: spotId } = useParams();
 
   const reject = useCallback(
-    booking_id => {
-      (async () => {
-        await api.post(`bookings/${booking_id}/rejection`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+    async bookingId => {
+      try {
+        await api.post(`bookings/${bookingId}/rejection`);
         const bookings = spot.bookings.filter(
-          booking => booking._id !== booking_id
+          booking => booking._id !== bookingId
         );
         setSpot({ ...spot, bookings });
-      })();
+      } catch (err) {
+      }
     },
-    [spot, token]
+    [spot]
   );
 
   const deleteSpot = useCallback(
@@ -45,11 +42,7 @@ export default () => {
 
   useEffect(() => {
     (async () => {
-      const { data } = await api.get(`spots/${spot_id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+        const { data } = await api.get(`spots/${spotId}`);
 
       setSpot({
         ...data,
@@ -59,7 +52,7 @@ export default () => {
         })),
       });
     })();
-  }, [spot_id, token]);
+  }, [spotId]);
 
   return (
     <>
@@ -74,7 +67,7 @@ export default () => {
                     <span key={tech}>{tech}</span>
                   ))}
                 </Techs>
-                <LinkButton to={`/spots/${spot_id}/edit`} data-testid="edit">
+                <LinkButton to={`/spots/${spotId}/edit`} data-testid="edit">
                   Editar
                 </LinkButton>
               </div>
@@ -123,7 +116,7 @@ export default () => {
             <button
               data-testid="delete"
               type="button"
-              onClick={() => deleteSpot(spot_id)}
+              onClick={() => deleteSpot(spotId)}
             >
               Remover Spot
             </button>
