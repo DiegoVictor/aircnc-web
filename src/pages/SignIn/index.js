@@ -1,6 +1,7 @@
 import React, { useCallback, useContext } from 'react';
 import { Form, Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+import { toast } from 'react-toastify';
 
 import { UserContext } from '~/contexts/User';
 import api from '~/services/api';
@@ -17,18 +18,22 @@ export default () => {
   const user = useContext(UserContext);
   const handleSubmit = useCallback(
     async ({ email }) => {
-      const { data } = await api.post('sessions', { email });
+      try {
+        const { data } = await api.post('sessions', { email });
 
-      const {
-        user: { _id: id },
-        token,
-      } = data;
+        const {
+          user: { _id: id },
+          token,
+        } = data;
 
-      localStorage.setItem('aircnc_user', JSON.stringify({ id, token }));
-      user.id = id;
-      user.token = token;
+        localStorage.setItem('aircnc_user', JSON.stringify({ id, token }));
+        user.id = id;
+        user.token = token;
 
-      history.push('/dashboard');
+        history.push('/dashboard');
+      } catch (err) {
+        toast.error('Opa! Alguma coisa deu errado, tente novamente!');
+      }
     },
     [user.id, user.token]
   );
