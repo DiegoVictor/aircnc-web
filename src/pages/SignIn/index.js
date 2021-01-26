@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { toast } from 'react-toastify';
 
 import { UserContext } from '~/contexts/User';
-import api from '~/services/api';
+import api, { setAuthorization } from '~/services/api';
 import history from '~/services/history';
 import Box from '~/components/Box';
 
@@ -27,6 +27,7 @@ export default () => {
         } = data;
 
         localStorage.setItem('aircnc_user', JSON.stringify({ id, token }));
+        setAuthorization(token);
         user.id = id;
         user.token = token;
 
