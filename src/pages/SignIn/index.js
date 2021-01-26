@@ -1,10 +1,17 @@
 import React, { useCallback, useContext } from 'react';
 import { Form, Input } from '@rocketseat/unform';
+import * as Yup from 'yup';
 
 import { UserContext } from '~/contexts/User';
 import api from '~/services/api';
 import history from '~/services/history';
 import Box from '~/components/Box';
+
+const schema = Yup.object().shape({
+  email: Yup.string()
+    .email('Digite um email valido')
+    .required('Campo obrigatório'),
+});
 
 export default () => {
   const user = useContext(UserContext);
@@ -33,11 +40,7 @@ export default () => {
           <strong>talentos</strong> para sua empresa
         </p>
 
-        <Form onSubmit={handleSubmit}>
-          <label htmlFor="email">Email *</label>
-          <Input
-            id="email"
-            name="email"
+      <Form schema={schema} onSubmit={handleSubmit}>
             type="email"
             placeholder="Seu melhor email"
             required
