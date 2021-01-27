@@ -51,15 +51,16 @@ export default () => {
 
   useEffect(() => {
     (async () => {
-      const response = await api.get(`/dashboard`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      setSpots(response.data);
+      try {
+        const { data } = await api.get(`/dashboard`);
+        setSpots(data);
+      } catch (err) {
+        toast.error(
+          'Opa! Alguma coisa deu errado ao tentar carregar seus spots, tente recarregar a pagina!'
+        );
+      }
     })();
-  }, [token]);
+  }, []);
 
   useEffect(() => {
     (async () => {
