@@ -19,7 +19,7 @@ import {
 export default () => {
   const [spots, setSpots] = useState([]);
   const [requests, setRequests] = useState([]);
-  const { id: user_id, token } = useContext(UserContext);
+  const { id: userId } = useContext(UserContext);
 
   const approve = useCallback(
     booking_id => {
@@ -90,7 +90,7 @@ export default () => {
 
   useEffect(() => {
     disconnect();
-    connect({ user_id });
+    connect({ user_id: userId });
     subscribe('booking_request', data => {
       setRequests([
         ...requests,
@@ -100,7 +100,7 @@ export default () => {
         },
       ]);
     });
-  }, [requests, user_id]);
+  }, [requests, userId]);
 
   return (
       <Box>
