@@ -1,6 +1,7 @@
-import React, { useCallback, useEffect, useState, useContext } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { parseISO, format } from 'date-fns';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -21,36 +22,42 @@ export default () => {
         );
         setSpot({ ...spot, bookings });
       } catch (err) {
+        toast.error(
+          'Opa! Alguma coisa deu errado ao tentar rejeitar a reserva, tente novamente!'
+        );
       }
     },
     [spot]
   );
 
-  const deleteSpot = useCallback(
-    id => {
-      (async () => {
-        await api.delete(`spots/${id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        history.push('/dashboard');
-      })();
-    },
-    [token]
-  );
+  const deleteSpot = useCallback(async id => {
+    try {
+      await api.delete(`spots/${id}`);
+      history.push('/dashboard');
+    } catch (err) {
+      toast.error(
+        'Opa! Alguma coisa deu errado ao tentar remover esse spot, tente novamente!'
+      );
+    }
+  }, []);
 
   useEffect(() => {
     (async () => {
+      try {
         const { data } = await api.get(`spots/${spotId}`);
 
-      setSpot({
-        ...data,
-        bookings: data.bookings.map(booking => ({
-          ...booking,
-          date: format(parseISO(booking.date), "dd'/'MM'/'yyyy"),
-        })),
-      });
+        setSpot({
+          ...data,
+          bookings: data.bookings.map(booking => ({
+            ...booking,
+            date: format(parseISO(booking.date), "dd'/'MM'/'yyyy"),
+          })),
+        });
+      } catch (err) {
+        toast.error(
+          'Opa! Alguma coisa deu errado ao tentar carregar o spot, tente recarregar a pagina!'
+        );
+      }
     })();
   }, [spotId]);
 
