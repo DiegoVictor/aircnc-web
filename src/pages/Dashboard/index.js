@@ -22,21 +22,17 @@ export default () => {
   const { id: userId } = useContext(UserContext);
 
   const approve = useCallback(
-    booking_id => {
-      (async () => {
-        await api.post(
-          `bookings/${booking_id}/approval`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+    async bookingId => {
+      try {
+        await api.post(`bookings/${bookingId}/approval`);
+        setRequests(requests.filter(request => request._id !== bookingId));
+      } catch (err) {
+        toast.error(
+          'Opa! Alguma coisa deu errado ao tentar aprovar essa reserva, tente novamente!'
         );
-        setRequests(requests.filter(request => request._id !== booking_id));
-      })();
+      }
     },
-    [requests, token]
+    [requests]
   );
 
   const reject = useCallback(
