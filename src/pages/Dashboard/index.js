@@ -36,21 +36,17 @@ export default () => {
   );
 
   const reject = useCallback(
-    booking_id => {
-      (async () => {
-        await api.post(
-          `bookings/${booking_id}/rejection`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+    async bookingId => {
+      try {
+        await api.post(`bookings/${bookingId}/rejection`);
+        setRequests(requests.filter(request => request._id !== bookingId));
+      } catch (err) {
+        toast.error(
+          'Opa! Alguma coisa deu errado ao tentar rejeitar essa reserva, tente novamente!'
         );
-        setRequests(requests.filter(request => request._id !== booking_id));
-      })();
+      }
     },
-    [requests, token]
+    [requests]
   );
 
   useEffect(() => {
