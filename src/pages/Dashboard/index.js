@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { format, parseISO } from 'date-fns';
+import { toast } from 'react-toastify';
 
 import { UserContext } from '~/contexts/User';
 import api from '~/services/api';
@@ -64,22 +65,24 @@ export default () => {
 
   useEffect(() => {
     (async () => {
-      const { data } = await api.get('pending', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      try {
+        const { data } = await api.get('pending');
 
-      setRequests(
-        data.map(request => {
-          return {
-            ...request,
-            date: format(parseISO(request.date), "dd'/'MM'/'yyyy"),
-          };
-        })
-      );
+        setRequests(
+          data.map(request => {
+            return {
+              ...request,
+              date: format(parseISO(request.date), "dd'/'MM'/'yyyy"),
+            };
+          })
+        );
+      } catch (err) {
+        toast.error(
+          'Opa! Alguma coisa deu errado ao tentar carregar a lista de reservas pendentes, tente recarregar a pagina!'
+        );
+      }
     })();
-  }, [token]);
+  }, [userId]);
 
   useEffect(() => {
     disconnect();
