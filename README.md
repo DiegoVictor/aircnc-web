@@ -49,6 +49,7 @@ In this file you may configure the API's url. Rename the `.env.example` in the r
 key|description|default
 ---|---|---
 REACT_APP_API_URL|API's url with version (v1)|`http://localhost:3333/v1`
+REACT_APP_SOCKET_URL|API's url|`http://localhost:3333`
 
 ### API
 Start the [API](https://github.com/DiegoVictor/aircnc-api) (see its README for more information). In case of any change in the API's `port` or `host` remember to update the [`.env`](#env) too.
