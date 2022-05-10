@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, act, fireEvent } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
-import faker from 'faker';
+import faker from '@faker-js/faker';
 import { Router } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -14,8 +14,8 @@ import Dashboard from '~/pages/Dashboard';
 
 describe('Dashboard page', () => {
   const apiMock = new MockAdapter(api);
-  const id = faker.random.number();
-  const token = faker.random.uuid();
+  const id = faker.datatype.number();
+  const token = faker.datatype.uuid();
 
   beforeEach(async () => {
     await act(async () => {

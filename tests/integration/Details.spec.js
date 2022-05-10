@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, act, fireEvent } from '@testing-library/react';
-import faker from 'faker';
+import faker from '@faker-js/faker';
 import MockAdapter from 'axios-mock-adapter';
 import { Router } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ import Details from '~/pages/Details';
 
 jest.mock('~/services/history');
 
-const spotId = faker.random.number();
+const spotId = faker.datatype.number();
 const mockedUseParams = () => {
   return { id: spotId };
 };
@@ -28,8 +28,8 @@ jest.mock('react-router-dom', () => {
 
 describe('Details page', () => {
   const apiMock = new MockAdapter(api);
-  const id = faker.random.number();
-  const token = faker.random.uuid();
+  const id = faker.datatype.number();
+  const token = faker.datatype.uuid();
 
   history.push.mockImplementation(jest.fn());
 
