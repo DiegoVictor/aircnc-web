@@ -12,6 +12,6 @@ jobs:
       - run: npm run test
       - codecov/upload
 workflows:
-    main:
-      jobs:
-        - test
+  main:
+    jobs:
+      - test
