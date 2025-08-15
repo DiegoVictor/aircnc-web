@@ -15,7 +15,7 @@
     "react-toastify": "^6.2.0",
     "socket.io-client": "^2.3.0",
     "styled-components": "^4.4.0",
-    "yup": "^0.28.0"
+    "yup": "^1.7.0"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -47,18 +47,18 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^11.2.2",
     "@types/jest": "^24.0.25",
-    "axios-mock-adapter": "^1.17.0",
+    "axios-mock-adapter": "^2.1.0",
     "babel-plugin-root-import": "^6.4.1",
     "customize-cra": "^0.8.0",
-    "eslint-config-prettier": "^6.3.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-prettier": "^5.5.4",
     "eslint-plugin-react": "^7.15.1",
-    "eslint-plugin-react-hooks": "^1.7.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "factory-girl": "^5.0.4",
-    "jest-localstorage-mock": "^2.4.0",
-    "prettier": "^1.18.2",
+    "jest-localstorage-mock": "^2.4.26",
+    "prettier": "^3.6.2",
     "react-app-rewired": "^2.1.4"
   }
 }
