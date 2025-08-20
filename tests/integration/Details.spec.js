@@ -1,10 +1,10 @@
 import React from 'react';
-import { render, act, fireEvent } from '@testing-library/react';
+import { render, act, fireEvent, waitFor } from '@testing-library/react';
 import faker from '@faker-js/faker';
 import MockAdapter from 'axios-mock-adapter';
 import { Router } from 'react-router-dom';
-
 import { toast } from 'react-toastify';
+
 import { UserContext } from '~/contexts/User';
 import api from '~/services/api';
 import history from '~/services/history';
@@ -47,29 +47,24 @@ describe('Details page', () => {
       bookings: [],
     });
 
-    let getByText;
-    let getByTestId;
+    const { getByTestId, getByText } = render(
+      <UserContext.Provider value={{ id, token }}>
+        <Router history={history}>
+          <Details />
+        </Router>
+      </UserContext.Provider>
+    );
 
-    await act(async () => {
-      const component = render(
-        <UserContext.Provider value={{ id, token }}>
-          <Router history={history}>
-            <Details />
-          </Router>
-        </UserContext.Provider>
-      );
-
-      getByText = component.getByText;
-      getByTestId = component.getByTestId;
-    });
+    await waitFor(() => getByText(spot.company));
 
     expect(getByTestId('edit')).toBeInTheDocument();
     expect(getByText(spot.company)).toBeInTheDocument();
+
     expect(getByTestId('banner')).toHaveStyle(
-      `background-color: url('${spot.thumbnail_url}')`
+      `background-image: url('${spot.thumbnail_url}')`
     );
 
-    spot.techs.forEach(tech => {
+    spot.techs.forEach((tech) => {
       expect(getByText(tech)).toBeInTheDocument();
     });
 
