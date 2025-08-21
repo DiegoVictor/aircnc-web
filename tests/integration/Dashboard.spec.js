@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, act, fireEvent } from '@testing-library/react';
 import MockAdapter from 'axios-mock-adapter';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import { Router } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -14,8 +14,8 @@ import Dashboard from '~/pages/Dashboard';
 
 describe('Dashboard page', () => {
   const apiMock = new MockAdapter(api);
-  const id = faker.datatype.number();
-  const token = faker.datatype.uuid();
+  const id = faker.number.int();
+  const token = faker.string.uuid();
 
   beforeEach(async () => {
     await act(async () => {
@@ -45,7 +45,7 @@ describe('Dashboard page', () => {
       getByTestId = component.getByTestId;
     });
 
-    spots.forEach(spot => {
+    spots.forEach((spot) => {
       expect(getByTestId(`spot_${spot._id}`)).toBeInTheDocument();
     });
   });
@@ -53,11 +53,7 @@ describe('Dashboard page', () => {
   it('should not be able to list my spots with network error', async () => {
     const error = jest.spyOn(toast, 'error');
 
-    apiMock
-      .onGet('/dashboard')
-      .reply(404)
-      .onGet('/pending')
-      .reply(200, []);
+    apiMock.onGet('/dashboard').reply(404).onGet('/pending').reply(200, []);
 
     await act(async () => {
       render(
@@ -76,11 +72,7 @@ describe('Dashboard page', () => {
 
   it('should not be able to list pending spots with network error', async () => {
     const spots = await factory.attrsMany('Spot', 3);
-    apiMock
-      .onGet('/dashboard')
-      .reply(200, spots)
-      .onGet('/pending')
-      .reply(404);
+    apiMock.onGet('/dashboard').reply(200, spots).onGet('/pending').reply(404);
 
     const error = jest.spyOn(toast, 'error');
 
@@ -147,7 +139,7 @@ describe('Dashboard page', () => {
       getByTestId = component.getByTestId;
     });
 
-    requests.forEach(request => {
+    requests.forEach((request) => {
       expect(getByTestId(`notification_${request._id}`)).toBeInTheDocument();
     });
   });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { act, render, fireEvent } from '@testing-library/react';
 import { Router } from 'react-router-dom';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import MockAdapter from 'axios-mock-adapter';
 
 import { toast } from 'react-toastify';
@@ -11,7 +11,7 @@ import history from '~/services/history';
 import factory from '../utils/factory';
 import Spot from '~/pages/Spot';
 
-const spotId = faker.datatype.number();
+const spotId = faker.number.int();
 let mockedUseParams = () => {
   return { id: spotId };
 };
@@ -27,8 +27,8 @@ jest.mock('~/services/history');
 
 describe('Spot page', () => {
   const apiMock = new MockAdapter(api);
-  const id = faker.datatype.number();
-  const token = faker.datatype.uuid();
+  const id = faker.number.int();
+  const token = faker.string.uuid();
 
   history.push.mockImplementation(jest.fn());
 
@@ -111,7 +111,7 @@ describe('Spot page', () => {
 
     apiMock.onPost('spots').reply(200);
     global.URL.createObjectURL = jest.fn(() => {
-      return faker.image.imageUrl();
+      return faker.image.url();
     });
 
     let getByPlaceholderText;
@@ -160,7 +160,7 @@ describe('Spot page', () => {
 
     apiMock.onPost('spots').reply(400);
     global.URL.createObjectURL = jest.fn(() => {
-      return faker.image.imageUrl();
+      return faker.image.url();
     });
 
     let getByPlaceholderText;

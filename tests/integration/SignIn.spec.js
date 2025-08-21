@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, fireEvent, act } from '@testing-library/react';
-import faker from '@faker-js/faker';
+import { faker } from '@faker-js/faker';
 import MockAdapter from 'axios-mock-adapter';
 
 import { toast } from 'react-toastify';
@@ -12,8 +12,8 @@ import SignIn from '~/pages/SignIn';
 jest.mock('~/services/history');
 
 describe('SignIn page', () => {
-  const id = faker.datatype.number();
-  const token = faker.datatype.uuid();
+  const id = faker.number.int();
+  const token = faker.string.uuid();
   const email = faker.internet.email();
   const apiMock = new MockAdapter(api);
 
