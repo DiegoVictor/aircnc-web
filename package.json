@@ -54,7 +54,7 @@
     "babel-jest": "^30.0.5",
     "babel-plugin-root-import": "^6.4.1",
     "customize-cra": "^0.8.0",
-    "eslint": "^9.33.0",
+    "eslint": "^9.34.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
