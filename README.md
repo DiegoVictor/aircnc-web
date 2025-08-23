@@ -2,7 +2,7 @@
 [![CircleCI](https://img.shields.io/circleci/build/github/DiegoVictor/aircnc-web?style=flat-square&logo=circleci)](https://app.circleci.com/pipelines/github/DiegoVictor/aircnc-web?branch=main)
 [![reactjs](https://img.shields.io/badge/reactjs-16.14.0-61dafb?style=flat-square&logo=react)](https://reactjs.org/)
 [![styled-components](https://img.shields.io/badge/styled_components-4.4.1-db7b86?style=flat-square&logo=styled-components)](https://styled-components.com/)
-[![eslint](https://img.shields.io/badge/eslint-9.33.0-4b32c3?style=flat-square&logo=eslint)](https://eslint.org/)
+[![eslint](https://img.shields.io/badge/eslint-9.34.0-4b32c3?style=flat-square&logo=eslint)](https://eslint.org/)
 [![jest](https://img.shields.io/badge/jest-30.0.5-brightgreen?style=flat-square&logo=jest)](https://jestjs.io/)
 [![coverage](https://img.shields.io/codecov/c/gh/DiegoVictor/aircnc-web?logo=codecov&style=flat-square)](https://codecov.io/gh/DiegoVictor/aircnc-web)
 [![MIT License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](https://raw.githubusercontent.com/DiegoVictor/aircnc-web/main/LICENSE)
